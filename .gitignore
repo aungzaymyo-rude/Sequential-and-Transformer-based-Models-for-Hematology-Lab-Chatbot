@@ -1,0 +1,9 @@
+﻿__pycache__/
+*.pyc
+*.pyo
+.venv/
+results/metrics/*.json
+results/figures/*
+results/tables/*
+data/processed/*
+data/splits/*
