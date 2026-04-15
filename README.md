@@ -1,34 +1,47 @@
 ﻿# Medical Intent Classification Study
 
-Paper-focused project scaffold for comparing sequential and Transformer models on medical intent classification.
+Paper-focused project for comparing sequential neural networks and Transformer models on medical intent classification.
 
-## Purpose
-This project is organized for research experiments, reproducibility, and paper writing.
-It is separate from the chatbot application prototype.
+## Scope
+This repository is for reproducible ML experiments. It is not the chatbot application repo.
 
-## Structure
-- `data/raw` : raw source material
-- `data/labeled` : manually labeled intent data
-- `data/processed` : cleaned datasets
-- `data/splits` : fixed train/val/test splits
-- `preprocessing` : text cleaning, tokenization, label encoding
-- `baselines` : LSTM, BiLSTM, GRU implementations
-- `transformers` : BERT/RoBERTa-based classifiers
-- `experiments` : unified runners and configs
-- `evaluation` : metrics, reports, comparison tools
-- `results/metrics` : experiment metric outputs
-- `results/figures` : exported figures
-- `results/tables` : generated comparison tables
-- `paper/drafts` : paper draft files
-- `paper/figures` : figures used in the paper
-- `paper/tables` : tables used in the paper
-- `scripts` : helper scripts for data and experiments
-- `configs` : experiment configs
+## Layout
+- `data/raw`: raw source material
+- `data/labeled`: manually labeled training files
+- `data/processed`: merged training dataset
+- `data/splits`: fixed train/validation/test splits
+- `preprocessing`: cleaning, dataset IO, split generation
+- `baselines`: LSTM, BiLSTM, and GRU baselines
+- `transformer_models`: Transformer baseline training
+- `experiments`: config loading and experiment runner
+- `evaluation`: metrics and run artifact writers
+- `results`: saved experiment outputs
+- `paper`: paper notes, figures, and tables
+- `scripts`: dataset preparation entrypoints
 
-## Next Implementation Steps
-1. Freeze dataset format and create split generation script.
-2. Port current preprocessing and Transformer pipeline from the prototype.
-3. Add sequential baselines under `baselines`.
-4. Create a unified experiment runner.
-5. Save all outputs in `results` with reproducible metadata.
-6. Write paper notes and result summaries under `paper`.
+## Workflow
+1. Put labeled CSV/JSONL files into `data/labeled`.
+2. Optionally generate synthetic bootstrap data.
+3. Merge data into one processed dataset.
+4. Create fixed train/validation/test splits.
+5. Run comparable experiments from the same split files.
+6. Use `results/` artifacts for paper tables and figures.
+
+## Quick Start
+```bash
+python scripts/generate_synthetic_dataset.py --per-intent 80 --fallback-count 20 --output data/processed/bootstrap.jsonl --overwrite
+python scripts/merge_labeled_data.py --base data/processed/bootstrap.jsonl --external-dir data/labeled --output data/processed/intent_dataset.jsonl --overwrite
+python scripts/create_splits.py --dataset data/processed/intent_dataset.jsonl --output-dir data/splits --overwrite
+python experiments/run_experiment.py --config configs/bert.yaml
+python experiments/run_experiment.py --config configs/lstm.yaml
+```
+
+## Expected Dataset Format
+CSV or JSONL rows should use:
+- `text`
+- `intent`
+- optional `lang` (defaults to `en`)
+- optional `source`
+
+## Current Seed Data
+A bootstrap labeled file is copied from the prototype into `data/labeled/bootstrap_cbc_real_phrases_400.csv`.

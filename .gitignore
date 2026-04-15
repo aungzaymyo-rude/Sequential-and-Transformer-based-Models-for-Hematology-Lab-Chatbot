@@ -2,8 +2,13 @@
 *.pyc
 *.pyo
 .venv/
-results/metrics/*.json
+results/metrics/*
 results/figures/*
 results/tables/*
+!results/metrics/.gitkeep
+!results/figures/.gitkeep
+!results/tables/.gitkeep
 data/processed/*
+!data/processed/.gitkeep
 data/splits/*
+!data/splits/.gitkeep

@@ -1,0 +1,33 @@
+﻿experiment_name: gru_baseline
+seed: 42
+results_dir: results/metrics
+
+data:
+  processed_dataset_path: data/processed/intent_dataset.jsonl
+  splits_dir: data/splits
+  test_size: 0.15
+  val_size: 0.15
+  language: en
+
+preprocessing:
+  lowercase: true
+  strip_control_chars: true
+  collapse_whitespace: true
+
+model:
+  family: sequential
+  architecture: gru
+  embedding_dim: 128
+  hidden_dim: 128
+  num_layers: 1
+  dropout: 0.2
+  bidirectional: false
+  min_freq: 1
+  max_vocab_size: 10000
+
+training:
+  epochs: 8
+  train_batch_size: 32
+  eval_batch_size: 64
+  learning_rate: 1.0e-3
+  weight_decay: 1.0e-5

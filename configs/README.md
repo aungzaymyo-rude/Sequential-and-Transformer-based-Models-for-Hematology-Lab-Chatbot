@@ -1,10 +1,10 @@
 ﻿# Configs
 
-Place experiment configuration files here.
-Suggested files:
-- `dataset.yaml`
-- `lstm.yaml`
-- `bilstm.yaml`
-- `gru.yaml`
-- `bert.yaml`
-- `roberta.yaml`
+Each experiment config is self-contained and should declare:
+- dataset locations
+- split locations
+- results directory
+- model family (`sequential` or `transformer`)
+- model hyperparameters
+- training hyperparameters
+- evaluation settings

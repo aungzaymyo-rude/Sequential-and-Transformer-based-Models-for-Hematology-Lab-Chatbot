@@ -1,7 +1,8 @@
 ﻿# Paper Workspace
 
-Use this folder for:
-- outline
+Use this directory for:
+- outlines
 - abstract drafts
-- methodology notes
-- final figures and tables
+- methods notes
+- result interpretation notes
+- final figures and tables copied from `results/`
